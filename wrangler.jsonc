@@ -1,0 +1,18 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "gpg-wkd-worker",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-12-25",
+	"assets": {
+		"directory": "./keys",
+		"binding": "ASSETS",
+		"run_worker_first": true
+	},
+	"observability": {
+		"enabled": false
+	}
+}
