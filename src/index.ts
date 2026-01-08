@@ -1,6 +1,11 @@
 // @ts-expect-error
 import keyManifest from "./key-manifest.json";
 
+function wrapResponse(response: Response): Response {
+    response.headers.set('Access-Control-Allow-Origin', '*');
+    return response;
+}
+
 export default {
     async fetch(request, env, ctx): Promise<Response> {
         const reqUrl = new URL(request.url);
@@ -8,20 +13,21 @@ export default {
 
         const parts = reqUrl.pathname.split('/').filter(Boolean);
         if (parts[0] !== '.well-known' || parts[1] !== 'openpgpkey') {
-            return new Response("I'm a WKD server! This is not the key you're looking for.", {
+            return wrapResponse(new Response("I'm a WKD server! This is not the key you're looking for.", {
                 status: 404
-            });
+            }));
         }
 
         const requestType = isAdvancedMode ? parts[3] : parts[2];
         if (requestType?.toLowerCase() === "policy") {
-            return new Response("I'm a WKD server!", {
+            // Keep empty content.
+            return wrapResponse(new Response("", {
                 status: 200
-            });
+            }));
         } else if (requestType !== "hu") {
-            return new Response("This is not the key you're looking for.", {
+            return wrapResponse(new Response("This is not the key you're looking for.", {
                 status: 404
-            });
+            }));
         }
         
         // Direct Mode: /.well-known/openpgpkey/(hu|policy)/{wkdHash}
@@ -30,9 +36,9 @@ export default {
         const userIdHash = isAdvancedMode ? parts[4] : parts[3];
         const lookupKey = `${domain}/${userIdHash}`;
         if (!keyManifest[lookupKey]) {
-            return new Response("This is not the key you're looking for.", {
+            return wrapResponse(new Response("This is not the key you're looking for.", {
                 status: 404
-            });
+            }));
         }
 
         const assetRequest = new Request(`${reqUrl.origin}/${keyManifest[lookupKey]}`);
@@ -40,7 +46,6 @@ export default {
 
         const newResponse = new Response(assetResponse.body, assetResponse);
         newResponse.headers.set('Content-Type', 'application/octet-stream');
-        newResponse.headers.set('Access-Control-Allow-Origin', '*');
-        return newResponse;
+        return wrapResponse(newResponse);
     },
 } satisfies ExportedHandler<Env>;
