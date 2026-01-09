@@ -1,6 +1,6 @@
 # 🔐 Cloudflare WKD Server
 
-[English](./README.md) | 中文
+English | [中文](./README.zh.md)
 
 An automated **Web Key Directory (WKD)** distribution solution based on Cloudflare Workers & Assets. Simply store your PGP public keys in the repository to automatically deploy a globally distributed public key query service.
 

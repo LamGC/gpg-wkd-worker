@@ -1,6 +1,6 @@
 # 🔐 Cloudflare WKD Server
 
-English | [中文](./README.zh.md)
+[English](./README.md) | 中文
 
 基于 Cloudflare Workers & Assets 的 **Web Key Directory (WKD)** 自动化分发方案。只需将 PGP 公钥存入仓库，即可自动部署全球分发的公钥查询服务。
 
