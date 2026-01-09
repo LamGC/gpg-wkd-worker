@@ -2,9 +2,8 @@
 
 [English](./README.md) | 中文
 
-基于 Cloudflare Workers & Assets 的 **Web Key Directory (WKD)** 自动化分发方案。只需将 PGP 公钥存入仓库，即可自动部署全球分发的公钥查询服务。
+基于 Cloudflare Workers & Assets 的 **Web Key Directory (WKD)** 自动化分发方案。只需将 PGP 公钥存入仓库，即可自动部署全球分发的公钥查询服务。  
 
-[![Deploy to Cloudflare Workers](https://github.com/microsoft/fluentui-system-icons/raw/main/assets/Cloud/ic_fluent_cloud_24_regular.svg)](#) 
 [什么是 WKD?](https://www.webkeydirectory.com/what-is-wkd) | 自动化 z-base-32 哈希映射 | 零成本维护
 
 ---

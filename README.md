@@ -2,9 +2,8 @@
 
 English | [中文](./README.zh.md)
 
-An automated **Web Key Directory (WKD)** distribution solution based on Cloudflare Workers & Assets. Simply store your PGP public keys in the repository to automatically deploy a globally distributed public key query service.
+An automated **Web Key Directory (WKD)** distribution solution based on Cloudflare Workers & Assets. Simply store your PGP public keys in the repository to automatically deploy a globally distributed public key query service.  
 
-[![Deploy to Cloudflare Workers](https://github.com/microsoft/fluentui-system-icons/raw/main/assets/Cloud/ic_fluent_cloud_24_regular.svg)](#) 
 [What is WKD?](https://www.webkeydirectory.com/what-is-wkd) | Automated z-base-32 hash mapping | Zero-maintenance
 
 ---
