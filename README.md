@@ -29,14 +29,14 @@ To prevent deploying sample data, please clean up the directory first:
 
 1. **Clean Directory**: Delete all existing subfolders under the `keys/` folder (i.e., remove the example domain and keys).
 2. **Export Keys**: Export your binary public key (must contain the Email you want to host):
-   @@@bash
+   ```bash
    # Export public key, recommended to strip third-party signatures to reduce size (Recommended)
    # If your email is alice@example.com, your filename must be alice.gpg
    gpg --export --export-options export-clean alice@example.com > alice.gpg
 
    # If you want to include all third-party signatures, omit --export-options export-clean.
    gpg --export alice@example.com > alice.gpg
-   @@@
+   ```
 3. **Store by Structure**: Place the exported `.gpg` file into the folder corresponding to the domain:
    - Path format: `keys/{domain}/{username}.gpg`
    - Example: `keys/example.com/alice.gpg`
@@ -48,11 +48,11 @@ Add the following **Repository Secrets** in your GitHub repository under `Settin
 
 ### 4. Automated Deployment
 Simply push your changes to Git, and GitHub Actions will automatically calculate the hashes and deploy:
-@@@bash
+```bash
 git add .
 git commit -m "feat: setup my wkd keys"
 git push origin main
-@@@
+```
 
 ### 5. Set Worker Routes
 After Github Actions completes the deployment, go to the [Cloudflare Dashboard](https://dash.cloudflare.com/?to=/:account/workers-and-pages).
@@ -67,23 +67,23 @@ If you want to develop locally or prefer manual deployment via CLI, follow these
 
 ### 1. Environment Setup
 Ensure Node.js is installed (Node.js v22+ required) and login to Wrangler:
-@@@bash
+```bash
 npm install
 npx wrangler login
-@@@
+```
 
 ### 2. Generate Manifest File
 Before deploying, you **must** place the keys correctly in the `keys/` directory and run the script to generate `src/key-manifest.json`:
-@@@bash
+```bash
 # Run the generation script (Ensure you are in the project root directory)
 node generate-manifest.mjs
-@@@
+```
 *Upon success, you should see a prompt indicating the number of generated keys in the terminal.*
 
 ### 3. Deploy to Cloudflare
-@@@bash
+```bash
 npx wrangler deploy
-@@@
+```
 
 ### 4. Set Worker Routes
 After the deployment is complete, go to the [Cloudflare Dashboard](https://dash.cloudflare.com/?to=/:account/workers-and-pages).
@@ -97,10 +97,10 @@ After deployment, you can verify if the service is working normally in two ways:
 
 **Method 1: Command Line Verification (GnuPG)**
 
-@@@bash
+```bash
 # Locate external keys using GnuPG directly
 gpg --locate-external-keys --auto-key-locate wkd your-email@example.com
-@@@
+```
 If successful, you should see a message indicating the public key has been automatically imported.
 
 **Method 2: Online Tool Verification**
